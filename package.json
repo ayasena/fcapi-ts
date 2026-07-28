@@ -1,0 +1,15 @@
+{
+  "name": "fcapi-ts",
+  "module": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "openapi-ts": "openapi-ts"
+  },
+  "devDependencies": {
+    "@hey-api/openapi-ts": "^0.99.0",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
