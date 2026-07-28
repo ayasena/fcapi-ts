@@ -85,12 +85,12 @@ paths:
         Will fail if update is not possible.
       operationId: putBalloon
       parameters:
-      - name: body
-        in: body
-        description: Balloon properties
-        required: true
-        schema:
-          $ref: "#/definitions/Balloon"
+        - name: body
+          in: body
+          description: Balloon properties
+          required: true
+          schema:
+            $ref: "#/definitions/Balloon"
       responses:
         204:
           description: Balloon device created/updated
@@ -109,12 +109,12 @@ paths:
         Will fail if update is not possible.
       operationId: patchBalloon
       parameters:
-      - name: body
-        in: body
-        description: Balloon properties
-        required: true
-        schema:
-          $ref: "#/definitions/BalloonUpdate"
+        - name: body
+          in: body
+          description: Balloon properties
+          required: true
+          schema:
+            $ref: "#/definitions/BalloonUpdate"
       responses:
         204:
           description: Balloon device updated
@@ -151,12 +151,12 @@ paths:
         Will fail if update is not possible.
       operationId: patchBalloonStatsInterval
       parameters:
-      - name: body
-        in: body
-        description: Balloon properties
-        required: true
-        schema:
-          $ref: "#/definitions/BalloonStatsUpdate"
+        - name: body
+          in: body
+          description: Balloon properties
+          required: true
+          schema:
+            $ref: "#/definitions/BalloonStatsUpdate"
       responses:
         204:
           description: Balloon statistics interval updated
@@ -277,7 +277,6 @@ paths:
           schema:
             $ref: "#/definitions/Error"
 
-
   /drives/{drive_id}:
     put:
       summary: Creates or updates a drive. Pre-boot only.
@@ -342,8 +341,7 @@ paths:
   /pmem/{id}:
     put:
       summary: Creates or updates a pmem device. Pre-boot only.
-      description:
-        Creates new pmem device with ID specified by id parameter.
+      description: Creates new pmem device with ID specified by id parameter.
         If a pmem device with the specified ID already exists, updates its state based on new input.
         Will fail if update is not possible.
       operationId: putGuestPmemByID
@@ -607,8 +605,7 @@ paths:
   /entropy:
     put:
       summary: Creates an entropy device. Pre-boot only.
-      description:
-        Enables an entropy device that provides high-quality random data to the guest.
+      description: Enables an entropy device that provides high-quality random data to the guest.
       operationId: putEntropyDevice
       parameters:
         - name: body
@@ -707,8 +704,7 @@ paths:
   /network-interfaces/{iface_id}:
     put:
       summary: Creates a network interface. Pre-boot only.
-      description:
-        Creates new network interface with ID specified by iface_id path parameter.
+      description: Creates new network interface with ID specified by iface_id path parameter.
       operationId: putGuestNetworkInterfaceByID
       parameters:
         - name: iface_id
@@ -735,8 +731,7 @@ paths:
             $ref: "#/definitions/Error"
     patch:
       summary: Updates the rate limiters applied to a network interface. Post-boot only.
-      description:
-        Updates the rate limiters applied to a network interface.
+      description: Updates the rate limiters applied to a network interface.
       operationId: patchGuestNetworkInterfaceByID
       parameters:
         - name: iface_id
@@ -791,8 +786,7 @@ paths:
   /snapshot/load:
     put:
       summary: Loads a snapshot. Pre-boot only.
-      description:
-        Loads the microVM state from a snapshot.
+      description: Loads the microVM state from a snapshot.
         Only accepted on a fresh Firecracker process (before configuring
         any resource other than the Logger and Metrics).
       operationId: loadSnapshot
@@ -832,8 +826,7 @@ paths:
   /vm:
     patch:
       summary: Updates the microVM state.
-      description:
-        Sets the desired state (Paused or Resumed) for the microVM.
+      description: Sets the desired state (Paused or Resumed) for the microVM.
       operationId: patchVm
       parameters:
         - name: body
@@ -904,8 +897,7 @@ definitions:
     required:
       - amount_mib
       - deflate_on_oom
-    description:
-      Balloon device descriptor.
+    description: Balloon device descriptor.
     properties:
       amount_mib:
         type: integer
@@ -927,8 +919,7 @@ definitions:
     type: object
     required:
       - amount_mib
-    description:
-      Balloon device descriptor.
+    description: Balloon device descriptor.
     properties:
       amount_mib:
         type: integer
@@ -936,8 +927,7 @@ definitions:
 
   BalloonStats:
     type: object
-    description:
-      Describes the balloon device statistics.
+    description: Describes the balloon device statistics.
     required:
       - target_pages
       - actual_pages
@@ -1023,8 +1013,7 @@ definitions:
 
   BalloonStartCmd:
     type: object
-    description:
-      Command used to start a free page hinting run.
+    description: Command used to start a free page hinting run.
     properties:
       acknowledge_on_stop:
         description: If Firecracker should automatically acknowledge when the guest submits a done cmd.
@@ -1032,8 +1021,7 @@ definitions:
 
   BalloonHintingStatus:
     type: object
-    description:
-      Describes the free page hinting status.
+    description: Describes the free page hinting status.
     required:
       - host_cmd
     properties:
@@ -1048,8 +1036,7 @@ definitions:
     type: object
     required:
       - stats_polling_interval_s
-    description:
-      Update the statistics polling interval, with the first statistics update scheduled immediately. Statistics cannot be turned on/off after boot.
+    description: Update the statistics polling interval, with the first statistics update scheduled immediately. Statistics cannot be turned on/off after boot.
     properties:
       stats_polling_interval_s:
         type: integer
@@ -1059,8 +1046,7 @@ definitions:
     type: object
     required:
       - kernel_image_path
-    description:
-      Boot source descriptor.
+    description: Boot source descriptor.
     properties:
       boot_args:
         type: string
@@ -1227,21 +1213,18 @@ definitions:
         type: boolean
       cache_type:
         type: string
-        description:
-          Represents the caching strategy for the block device.
+        description: Represents the caching strategy for the block device.
         enum: ["Unsafe", "Writeback"]
         default: "Unsafe"
 
       # VirtioBlock specific parameters
       is_read_only:
         type: boolean
-        description:
-          Is block read only.
+        description: Is block read only.
           This field is required for virtio-block config and should be omitted for vhost-user-block configuration.
       path_on_host:
         type: string
-        description:
-          Host level path for the guest drive.
+        description: Host level path for the guest drive.
           This field is required for virtio-block config and should be omitted for vhost-user-block configuration.
       rate_limiter:
         $ref: "#/definitions/RateLimiter"
@@ -1257,8 +1240,7 @@ definitions:
       # VhostUserBlock specific parameters
       socket:
         type: string
-        description:
-          Path to the socket of vhost-user-block backend.
+        description: Path to the socket of vhost-user-block backend.
           This field is required for vhost-user-block config should be omitted for virtio-block configuration.
 
   Pmem:
@@ -1269,21 +1251,17 @@ definitions:
     properties:
       id:
         type: string
-        description:
-          Identificator for this device.
+        description: Identificator for this device.
       path_on_host:
         type: string
-        description:
-          Host level path for the virtio-pmem device to use as a backing file.
+        description: Host level path for the virtio-pmem device to use as a backing file.
       root_device:
         type: boolean
-        description:
-          Flag to make this device be the root device for VM boot.
+        description: Flag to make this device be the root device for VM boot.
           Setting this flag will fail if there is another device configured to be a root device already.
       read_only:
         type: boolean
-        description:
-          Flag to map backing file in read-only mode.
+        description: Flag to map backing file in read-only mode.
       rate_limiter:
         $ref: "#/definitions/RateLimiter"
 
@@ -1336,8 +1314,7 @@ definitions:
 
   InstanceActionInfo:
     type: object
-    description:
-      Variant wrapper containing the real action.
+    description: Variant wrapper containing the real action.
     required:
       - action_type
     properties:
@@ -1351,8 +1328,7 @@ definitions:
 
   InstanceInfo:
     type: object
-    description:
-      Describes MicroVM instance information.
+    description: Describes MicroVM instance information.
     required:
       - app_name
       - id
@@ -1380,8 +1356,7 @@ definitions:
 
   Logger:
     type: object
-    description:
-      Describes the configuration option for the logging capability.
+    description: Describes the configuration option for the logging capability.
     properties:
       level:
         type: string
@@ -1471,8 +1446,7 @@ definitions:
 
   Metrics:
     type: object
-    description:
-      Describes the configuration option for the metrics capability.
+    description: Describes the configuration option for the metrics capability.
     required:
       - metrics_path
     properties:
@@ -1487,16 +1461,14 @@ definitions:
         default: false
       properties:
         type: object
-        description:
-          Operator-defined key-value pairs emitted under a top-level
+        description: Operator-defined key-value pairs emitted under a top-level
           "properties" field on each metrics line.
         additionalProperties:
           type: string
 
   MmdsConfig:
     type: object
-    description:
-      Defines the MMDS configuration.
+    description: Defines the MMDS configuration.
     required:
       - network_interfaces
     properties:
@@ -1533,14 +1505,12 @@ definitions:
 
   MmdsContentsObject:
     type: object
-    description:
-      Describes the contents of MMDS in JSON format.
+    description: Describes the contents of MMDS in JSON format.
     additionalProperties: true
 
   NetworkInterface:
     type: object
-    description:
-      Defines a network interface.
+    description: Defines a network interface.
     required:
       - host_dev_name
       - iface_id
@@ -1574,8 +1544,7 @@ definitions:
         type: string
       path_on_host:
         type: string
-        description:
-          Host level path for the guest drive.
+        description: Host level path for the guest drive.
           This field is optional for virtio-block config and should be omitted for vhost-user-block configuration.
       rate_limiter:
         $ref: "#/definitions/RateLimiter"
@@ -1654,12 +1623,10 @@ definitions:
     properties:
       iface_id:
         type: string
-        description:
-          The name of the interface to modify
+        description: The name of the interface to modify
       host_dev_name:
         type: string
-        description:
-          The new host device of the interface
+        description: The new host device of the interface
   VsockOverride:
     type: object
     description:
@@ -1670,8 +1637,7 @@ definitions:
     properties:
       uds_path:
         type: string
-        description:
-          The new path for the backing Unix Domain Socket.
+        description: The new path for the backing Unix Domain Socket.
 
   SnapshotLoadParams:
     type: object
@@ -1683,12 +1649,10 @@ definitions:
     properties:
       enable_diff_snapshots:
         type: boolean
-        description:
-          (Deprecated) Enable dirty page tracking to improve space efficiency of diff snapshots
+        description: (Deprecated) Enable dirty page tracking to improve space efficiency of diff snapshots
       track_dirty_pages:
         type: boolean
-        description:
-          Enable dirty page tracking to improve space efficiency of diff snapshots
+        description: Enable dirty page tracking to improve space efficiency of diff snapshots
       mem_file_path:
         type: string
         description:
@@ -1706,8 +1670,7 @@ definitions:
         description: Path to the file that contains the microVM state to be loaded.
       resume_vm:
         type: boolean
-        description:
-          When set to true, the vm is also resumed if the snapshot load is successful.
+        description: When set to true, the vm is also resumed if the snapshot load is successful.
       network_overrides:
         type: array
         description: Network host device names to override
@@ -1728,7 +1691,6 @@ definitions:
           elapsed since the snapshot was taken. When false (default), kvmclock resumes
           from where it was at snapshot time. This option may be extended to other clock
           sources and CPU architectures in the future."
-
 
   TokenBucket:
     type: object
@@ -1763,8 +1725,7 @@ definitions:
 
   Vm:
     type: object
-    description:
-      Defines the microVM running state. It is especially useful in the snapshotting context.
+    description: Defines the microVM running state. It is especially useful in the snapshotting context.
     required:
       - state
     properties:
@@ -1776,16 +1737,14 @@ definitions:
 
   EntropyDevice:
     type: object
-    description:
-      Defines an entropy device.
+    description: Defines an entropy device.
     properties:
       rate_limiter:
         $ref: "#/definitions/RateLimiter"
 
   SerialDevice:
     type: object
-    description:
-      The configuration of the serial device
+    description: The configuration of the serial device
     properties:
       serial_out_path:
         type: string
@@ -1801,8 +1760,7 @@ definitions:
 
   MemoryHotplugConfig:
     type: object
-    description:
-      The configuration of the hotpluggable memory device (virtio-mem)
+    description: The configuration of the hotpluggable memory device (virtio-mem)
     properties:
       total_size_mib:
         type: integer
@@ -1811,19 +1769,20 @@ definitions:
         type: integer
         default: 128
         minimum: 128
-        description: Slot size for the hotpluggable memory in MiB. This will determine the granularity of
+        description:
+          Slot size for the hotpluggable memory in MiB. This will determine the granularity of
           hot-plug memory from the host. Refer to the device documentation on how to tune this value.
       block_size_mib:
         type: integer
         default: 2
         minimum: 2
-        description: (Logical) Block size for the hotpluggable memory in MiB. This will determine the logical
+        description:
+          (Logical) Block size for the hotpluggable memory in MiB. This will determine the logical
           granularity of hot-plug memory for the guest. Refer to the device documentation on how to tune this value.
 
   MemoryHotplugSizeUpdate:
     type: object
-    description:
-      An update to the size of the hotpluggable memory region.
+    description: An update to the size of the hotpluggable memory region.
     properties:
       requested_size_mib:
         type: integer
@@ -1831,8 +1790,7 @@ definitions:
 
   MemoryHotplugStatus:
     type: object
-    description:
-      The status of the hotpluggable memory device (virtio-mem)
+    description: The status of the hotpluggable memory device (virtio-mem)
     properties:
       total_size_mib:
         type: integer
@@ -1852,8 +1810,7 @@ definitions:
 
   FirecrackerVersion:
     type: object
-    description:
-      Describes the Firecracker version.
+    description: Describes the Firecracker version.
     required:
       - firecracker_version
     properties:
